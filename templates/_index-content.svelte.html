@@ -1,0 +1,66 @@
+<div id="wrapper">
+  <div class="slide" id="compare">
+    <div class="chartHead">Where gunfire is most reported in Minneapolis</div>
+      <div class="chatter">Shows about 24,000 reported gun shots by Census tract from <span class="legendary blue1">less</span> to <span class="legendary blue5">more</span> across the years 2015 through 2020.</div>
+      
+      <div id="map"></div>
+      <p></p>
+      <div class="byline">Map: <a href="http://www.startribune.com/jeff-hargarten/274254381/" target="new_">Jeff Hargarten, Star Tribune</a> • Source: Minneapolis Police Department</div>
+
+  </div>
+
+  <div class="slide" id="sound" style="display:none">
+    <h2 class="chartHead">What gunshots sound like</h2>
+    <div class="chatter">It can sometimes be difficult to distinguish the sound of gunshots from other loud noises like fireworks, construction tools, slamming doors or vehicle backfires.</div>
+
+    <div id="players">
+      <div class="playerLabel">Gunshots</div>
+      <audio controls>
+          <source src="data/gunshot.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+
+        <div class="playerLabel">Fireworks</div>
+        <audio controls>
+          <source src="data/fireworks.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+
+        <div class="playerLabel">Firecrackers</div>
+        <audio controls>
+          <source src="data/firecrackers.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+
+        <div class="playerLabel">Jackhammer</div>
+        <audio controls>
+          <source src="data/jackhammer.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+
+        <div class="playerLabel">Vehicle Backfire</div>
+        <audio controls>
+              <source src="data/backfire.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+  </div>
+  </div>
+</div>
+
+<script>
+  export default {
+    oncreate() {
+      // For content that lives in the CMS directly, we hack
+      // around the share bits by removing it before we load
+      // the component, then re-attach here.
+      //
+      // This looks like
+      // <div class="share-placeholder">
+      //   <!-- share -->
+      // </div>
+      if (this.get().attachShare) {
+        this.get().attachShare();
+      }
+    }
+  };
+</script>

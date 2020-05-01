@@ -90,6 +90,25 @@ utils.autoEnablePym();
 import mpls from '../sources/minneapolis.json';
 import hex from '../sources/shots_hex.json';
 
+$.urlParam = function(name) {
+  var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  if (results != null) {
+      return results[1] || 0;
+  } else {
+      return null;
+  }
+}
+
+var selected = $.urlParam('chart');
+
+if (selected != null) {
+  $(".slide").hide();
+  $("#" + selected).show();
+}
+if (selected == "all") {
+  $(".slide").show();
+}
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RhcnRyaWJ1bmUiLCJhIjoiY2sxYjRnNjdqMGtjOTNjcGY1cHJmZDBoMiJ9.St9lE8qlWR5jIjkPYd3Wqw';
 
 var dzoom = 10.5;
@@ -229,17 +248,17 @@ map.on('load', function() {
             'fill-outline-color': {
              "property": "NUMPOINTS",
              "stops": [
-               [0, "#ffffff"],
-               [1, "#ffffff"],
-               [20, "#ffffff"],
-               [40, "#ffffff"],
-               [60, "#ffffff"],
-               [80, "#ffffff"],
-               [100, "#ffffff"]
+               [0, "#000000"],
+               [1, "#000000"],
+               [20, "#000000"],
+               [40, "#000000"],
+               [60, "#000000"],
+               [80, "#000000"],
+               [100, "#000000"]
             ]
          }
       }
-    });
+    }, "settlement-subdivision-label");
 
 });
 

@@ -258,7 +258,7 @@
         margin-top:25px;
     }
     
-    #map {
+    .map {
       height:550px;
       width:100%;
       margin-left:auto;
@@ -1106,7 +1106,7 @@
   
   // breakpoints 
   @media (max-width:640px) {
-      .slide, .container-lg, #wrapper, #map, .map, .chart, #chartTime, .byline, .adjacent {
+      .slide, .container-lg, #wrapper, .map, .chart, #chartTime, .byline, .adjacent {
           width:100% !important;
           max-width:100% !important;
           min-width:100% !important;

@@ -26,3 +26,7 @@ $strib-fonts-location: '//static.startribune.com/assets/libs/strib-icons/0.0.10/
     font-weight:bold !important;
     font-size:1.3em !important;
 }
+
+.mapboxgl-canvas {
+    position: static !important;
+}

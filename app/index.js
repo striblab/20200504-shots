@@ -87,8 +87,8 @@ utils.autoEnablePym();
 //   });
 // });
 
-import mpls from '../sources/minneapolis.json';
 import hex from '../sources/shots_hex.json';
+import hex_na from '../sources/shots_hex_na.json';
 
 $.urlParam = function(name) {
   var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -180,43 +180,6 @@ map.dragRotate.disable();
                 
 map.on('load', function() {
 
-      // map.addSource('mpls', {
-      //   type: 'geojson',
-      //   data: mpls
-      // });
-
-      // map.addLayer({
-      //       'id': 'mpls-layer',
-      //       'interactive': true,
-      //       'source': 'mpls',
-      //       'layout': {},
-      //       'type': 'line',
-      //       'paint': {
-      //         'line-width': 0.7,
-      //         'line-color': '#aaaaaa'
-      //       }
-      //   }, 'road-street');
-
-      //   map.addSource('locations', {
-      //     type: 'geojson',
-      //     data: locations
-      //   });
-  
-      //   map.addLayer({
-      //     'id': 'arrest-layer',
-      //     'interactive': true,
-      //     'source': 'locations',
-      //     'layout': {},
-      //     'type': 'circle',
-      //      'paint': {
-      //         'circle-opacity': 0.5,
-      //         'circle-radius': 4,
-      //         'circle-stroke-width': 0,
-      //         'circle-stroke-color': '#C28059',
-      //         'circle-color': '#C28059'
-      //      }
-      // });
-
 
       map.addSource('hex', {
         type: 'geojson',
@@ -237,28 +200,82 @@ map.on('load', function() {
              "stops": [
                [0, "rgba(255, 255, 255, 0.5)"],
                [1, "rgba(255, 245, 240, 1)"],
-               [200, "#D1E6E1"],
-               [400, "#A7E6E3"],
-               [600, "#67B4C2"],
-               [800, "#3580A3"],
-               [1000, "#0D4673"],
-               [1200, "#022642"]
+               [400, "#D1E6E1"],
+               [800, "#A7E6E3"],
+               [1200, "#67B4C2"],
+               [1600, "#3580A3"],
+               [2000, "#0D4673"],
+               [2400, "#022642"]
             ]
          },
-            'fill-outline-color': {
-             "property": "NUMPOINTS",
-             "stops": [
-               [0, "#000000"],
-               [1, "#000000"],
-               [20, "#000000"],
-               [40, "#000000"],
-               [60, "#000000"],
-               [80, "#000000"],
-               [100, "#000000"]
-            ]
-         }
+            'fill-outline-color': "#000000"
       }
     }, "settlement-subdivision-label");
+
+});
+
+
+var map2 = new mapboxgl.Map({
+  container: 'map2', // container id
+  style: 'mapbox://styles/startribune/ck1b7427307bv1dsaq4f8aa5h',
+  center: center,
+  zoom: mzoom,
+  minZoom: dzoom,
+  maxZoom: 13
+});
+
+
+map2.addControl(new mapboxgl.NavigationControl());
+map2.addControl(toggleControl2,'top-right');
+
+$('.my-custom-control2').on('click', function(){
+map2.jumpTo({
+  center: center,
+  zoom: mzoom,
+});
+});
+
+// map.addControl(new mapboxgl.NavigationControl());
+
+map2.scrollZoom.disable();
+map2.doubleClickZoom.disable();
+map2.touchZoomRotate.disableRotation();
+map2.dragRotate.disable();
+
+              
+map2.on('load', function() {
+
+
+    map2.addSource('hex_na', {
+      type: 'geojson',
+      data: hex_na
+    });
+
+    map2.addLayer({
+      'id': 'hexna-layer',
+      'interactive': true,
+      'source': 'hex_na',
+      'layout': {},
+      'type': 'fill',
+           'paint': {
+          'fill-antialias' : true,
+          'fill-opacity': 0.7,
+          'fill-color': {
+           "property": "NUMPOINTS",
+           "stops": [
+             [0, "rgba(255, 255, 255, 0.5)"],
+             [1, "rgba(255, 245, 240, 1)"],
+             [200, "#D1E6E1"],
+             [400, "#A7E6E3"],
+             [600, "#67B4C2"],
+             [800, "#3580A3"],
+             [1000, "#0D4673"],
+             [1200, "#022642"]
+          ]
+       },
+          'fill-outline-color': "#000000"
+    }
+  }, "settlement-subdivision-label");
 
 });
 
@@ -268,6 +285,10 @@ $(document).ready(function() {
             center: center,
             zoom: mobile_zoom,
         });
+        map2.flyTo({
+          center: center,
+          zoom: mobile_zoom,
+      });
     }
     $(window).resize(function() {
         if ($("#map").width() < 600) {
@@ -275,11 +296,19 @@ $(document).ready(function() {
                 center: center,
                 zoom: mobile_zoom,
             });
+            map2.flyTo({
+              center: center,
+              zoom: mobile_zoom,
+          });
         } else {
             map.flyTo({
                 center: center,
                 zoom: mzoom,
             });
+            map2.flyTo({
+              center: center,
+              zoom: mzoom,
+          });
         }
     });
 });

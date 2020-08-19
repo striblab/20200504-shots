@@ -1,6 +1,6 @@
-# 20200430 Cv 311
+# 20200504 Shots
 
-Analysis of 311 complaints in Minneapolis parks
+Analysis of gunshots in Minneapolis
 
 ## Data
 
